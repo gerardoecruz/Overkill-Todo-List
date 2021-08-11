@@ -70,6 +70,42 @@ app.delete("/todos/:id", async(req,res) => {
     }
 })
 
+// creating users routes
+app.post("/createUser", async(req, res) => {
+    try{
+        const {username, password} = req.body;
+        console.log(username)
+        console.log(password)
+        const newUser = await pool.query("INSERT INTO users (user_id, password) VALUES($1, $2) RETURNING *", [username, password])
+        res.json(newUser.rows[0])
+    }catch(err){
+        console.log(err.message)
+    }
+})
+
+// trying to do a login
+app.post("/login", async(req,res) => {
+    try{
+        const {username, password} = req.body;
+        console.log(username)
+        console.log(password)
+        const qpass = await pool.query("SELECT password FROM users WHERE user_id = $1", [username])
+        console.log(qpass.rows)
+        const newpass = JSON.stringify(qpass.rows)
+        console.log(newpass)
+        if(password == qpass ){
+            console.log("Welcome Back!")
+        }
+        else{
+            console.log("Wrong password")
+        }
+        
+        
+    }catch(err){
+        console.log(err.message)
+    }
+})
+
 app.listen(5000, () => {
     console.log("running on port 5000")
 })

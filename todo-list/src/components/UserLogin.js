@@ -1,7 +1,7 @@
 import React, {useState} from "react"
 import axios from "axios"
 
-function CreateUser(){
+function UserLogin(){
 
     const [user, setUser] = useState("");
     const [pass, setPass] = useState("")
@@ -11,7 +11,7 @@ function CreateUser(){
         try{
             axios({
                 method: "post",
-                url: "http://localhost:5000/createUser",
+                url: "http://localhost:5000/login",
                 data: {
                     username: user,
                     password: pass
@@ -24,7 +24,7 @@ function CreateUser(){
 
     return(
         <div>
-            <p> Make an Account</p>
+            <p> Login </p>
             <form onSubmit = {handleSubmit}>
                 <div>
                 <label style={{ color: 'white' }}>Username: </label>
@@ -52,4 +52,4 @@ function CreateUser(){
     )
 }
 
-export default CreateUser
+export default UserLogin

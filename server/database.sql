@@ -9,10 +9,10 @@ CREATE TABLE todo(
 );
 
 CREATE TABLE users(
-    user_id SERIAL PRIMARY KEY,
+    user_id VARCHAR(255) PRIMARY KEY,
     password VARCHAR(255)
 );
 
 ALTER TABLE todo
-    ADD COLUMN user_id INTEGER
+    ADD COLUMN user_id VARCHAR(255)
     REFERENCES users(user_id);
