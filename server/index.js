@@ -90,10 +90,7 @@ app.post("/login", async(req,res) => {
         console.log(username)
         console.log(password)
         const qpass = await pool.query("SELECT password FROM users WHERE user_id = $1", [username])
-        console.log(qpass.rows)
-        const newpass = JSON.stringify(qpass.rows)
-        console.log(newpass)
-        if(password == qpass ){
+        if(password == qpass.rows[0].password ){
             console.log("Welcome Back!")
         }
         else{
